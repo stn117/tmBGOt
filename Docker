@@ -1,0 +1,11 @@
+FROM alpine:latest
+
+MAINTAINER Dmitry Zaplatkin <zpldmitry@gmail.com>
+
+WORKDIR "/opt"
+
+ADD .docker_build/tmBGOt /opt/bin/tmBGOt
+ADD ./templates /opt/templates
+ADD ./static /opt/static
+
+CMD ["/opt/bin/tmBGOt"]

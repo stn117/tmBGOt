@@ -1,0 +1,12 @@
+{
+  "name": "Sinod of wild dogs",
+  "description": "Base bot for telegramm",
+  "keywords": [
+    "go",
+    "postgres"
+  ],
+  "image": "heroku/go:1.6",
+  "mount_dir": "src/github.com/stn117/tmBGOt.git",
+  "website": "https://github.com/stn117/tmBGOt.git",
+  "repository": "https://github.com/stn117/tmBGOt.git"
+}
