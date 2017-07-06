@@ -2,5 +2,9 @@
 	"comment": "",
 	"ignore": "test",
 	"package": [],
-	"rootPath": "github.com/stn117/tmBGOt"
+	"rootPath": "github.com/stn117/tmBGOt",
+	"heroku": {
+		"install" : [ "./..." ],
+		"goVersion": "go1.6"
+	 },
 }
