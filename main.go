@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"html"
 	"log"
 	"net/http"
 	_"net/http"
@@ -35,6 +36,8 @@ func update(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 	}
 
+
+
 	// if private or group
 	if message.Message.Chat.ID != 0 {
 		fmt.Println(message.Message.Chat.ID, message.Message.Text)
@@ -62,6 +65,9 @@ func main() {
 	PORT := os.Getenv("PORT")
 
 	http.HandleFunc("/api/v1/update", update)
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
+	})
 
 	fmt.Println("Listenning on port", PORT, ".")
 	if err := http.ListenAndServe(":"+PORT, nil); err != nil {
