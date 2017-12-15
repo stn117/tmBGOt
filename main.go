@@ -8,7 +8,7 @@ import (
 	_"net/http"
 	"os"
 
-	m "./models"
+	m"github.com/stn117/tmBGOt/models"
 	_"github.com/gin-gonic/gin"
 
 )
