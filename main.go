@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"html"
+	"io/ioutil"
 	"log"
 	"net/http"
 	_"net/http"
@@ -63,6 +64,16 @@ func update(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	PORT := os.Getenv("PORT")
+	resp, err := http.Get(BOT_URL + "setWebhook?url=%s" + MyURL)
+
+	bodyBytes, _ := ioutil.ReadAll(resp.Body)
+	bodyString := string(bodyBytes)
+
+	if err != nil {
+		log.Fatal(fmt.Sprintf("Can't set hook: %s. Quit.", bodyString))
+	}
+	resp.Body.Close()
+	print(bodyBytes)
 
 	http.HandleFunc("/api/v1/update", update)
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {

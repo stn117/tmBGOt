@@ -5,7 +5,7 @@
     "go",
     "postgres"
   ],
-  "image": "heroku/go:1.6",
+  "image": "heroku/go:1.7",
   "mount_dir": "src/github.com/stn117/tmBGOt",
   "website": "https://github.com/stn117/tmBGOt",
   "repository": "https://github.com/stn117/tmBGOt"
