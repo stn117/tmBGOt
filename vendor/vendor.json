@@ -33,6 +33,12 @@
 			"revisionTime": "2017-07-05T07:47:36Z"
 		},
 		{
+			"checksumSHA1": "P8QTYeGce4zkbCe3NdL6Q91PcTs=",
+			"path": "github.com/go-telegram-bot-api/telegram-bot-api",
+			"revision": "ebe7b8254e1592d3701010dc4f927a87b3559397",
+			"revisionTime": "2017-07-02T20:43:42Z"
+		},
+		{
 			"checksumSHA1": "qlPUeFabwF4RKAOF1H+yBFU1Veg=",
 			"path": "github.com/golang/protobuf/proto",
 			"revision": "6a1fa9404c0aebf36c879bc50152edcc953910d2",
@@ -43,6 +49,12 @@
 			"path": "github.com/mattn/go-isatty",
 			"revision": "fc9e8d8ef48496124e79ae0df75490096eccf6fe",
 			"revisionTime": "2017-03-22T23:44:13Z"
+		},
+		{
+			"checksumSHA1": "t8jzPFIv4DNACv+cuZoigNmjPLQ=",
+			"path": "github.com/technoweenie/multipartstreamer",
+			"revision": "a90a01d73ae432e2611d178c18367fbaa13e0154",
+			"revisionTime": "2013-10-20T00:18:33Z"
 		},
 		{
 			"checksumSHA1": "9Zw986fuQM/hCoVd8vmHoSM+8sU=",
