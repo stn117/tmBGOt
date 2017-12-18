@@ -64,7 +64,8 @@ func update(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	PORT := os.Getenv("PORT")
-	resp, err := http.Get(BOT_URL + "setWebhook?url=%s" + MyURL)
+	resp, err := http.Get(BOT_URL + "setWebhook?url=" + MyURL + "tmbgot")
+	print(resp.StatusCode)
 
 	bodyBytes, _ := ioutil.ReadAll(resp.Body)
 	bodyString := string(bodyBytes)
@@ -75,7 +76,7 @@ func main() {
 	resp.Body.Close()
 	print(bodyBytes)
 
-	http.HandleFunc("/api/v1/update", update)
+	http.HandleFunc("/tmbgot", update)
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
 	})
