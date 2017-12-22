@@ -5,11 +5,9 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	_"net/http"
 	"os"
 
 	"github.com/gin-gonic/gin"
-	_"github.com/gin-gonic/gin"
 
 )
 
