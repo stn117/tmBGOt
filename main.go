@@ -1,16 +1,14 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"html"
 	"io/ioutil"
 	"log"
 	"net/http"
 	_"net/http"
 	"os"
 
-	m"github.com/stn117/tmBGOt/models"
+	"github.com/gin-gonic/gin"
 	_"github.com/gin-gonic/gin"
 
 )
@@ -23,47 +21,13 @@ var (
 	BOT_URL = fmt.Sprintf("https://api.telegram.org/bot%s/", BOT_TOKEN)
 )
 
-
-
-func update(w http.ResponseWriter, r *http.Request) {
-
-	message := &m.ReceiveMessage{}
-
-	chatID := 0
-	msgText := ""
-
-	err := json.NewDecoder(r.Body).Decode(&message)
-	if err != nil {
-		fmt.Println(err)
-	}
-
-
-
-	// if private or group
-	if message.Message.Chat.ID != 0 {
-		fmt.Println(message.Message.Chat.ID, message.Message.Text)
-		chatID = message.Message.Chat.ID
-		msgText = message.Message.Text
-	} else {
-		// if channel
-		fmt.Println(message.ChannelPost.Chat.ID, message.ChannelPost.Text)
-		chatID = message.ChannelPost.Chat.ID
-		msgText = message.ChannelPost.Text
-	}
-
-	respMsg := fmt.Sprintf(
-		"%s%s/sendMessage?chat_id=%d&text=Received: %s",
-		BOT_URL, BOT_TOKEN, chatID, msgText)
-
-	// send echo resp
-	_, err = http.Get(respMsg)
-	if err != nil {
-		fmt.Println(err)
-	}
-}
-
 func main() {
 	PORT := os.Getenv("PORT")
+
+	if PORT == "" {
+		log.Fatal("$PORT must be set")
+	}
+
 	resp, err := http.Get(BOT_URL + "setWebhook?url=" + MyURL + "tmbgot")
 	print(resp.StatusCode)
 
@@ -76,32 +40,11 @@ func main() {
 	resp.Body.Close()
 	print(bodyBytes)
 
-	http.HandleFunc("/tmbgot", update)
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
-	})
+	router := gin.New()
+	router.Use(gin.Logger())
+	router.LoadHTMLGlob("./templates/*.tmpl.html")
+	//router.Static("/static", "static")
 
-	fmt.Println("Listenning on port", PORT, ".")
-	if err := http.ListenAndServe(":"+PORT, nil); err != nil {
-		log.Fatal(err)
-	}
+	SetupUrls(router)
+	router.Run(":" + PORT)
 }
-
-
-//func main() {
-//	port := os.Getenv("PORT")
-//
-//	if port == "" {
-//		log.Fatal("$PORT must be set")
-//	}
-//
-//	router := gin.New()
-//	router.Use(gin.Logger())
-//	router.LoadHTMLGlob("./templates/*.tmpl.html")
-//	//router.Static("/static", "static")
-//
-//	SetupUrls(router)
-//	router
-//
-//	router.Run(":" + port)
-//}
